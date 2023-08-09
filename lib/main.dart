@@ -3,24 +3,35 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:jinchanchan/app/app_theme.dart';
+import 'package:jinchanchan/controller/app_controller.dart';
 import 'package:jinchanchan/page/index/index_page.dart';
 import 'package:jinchanchan/page/sort_low_page.dart';
 import 'package:jinchanchan/page/sort_middle_page.dart';
 import 'package:jinchanchan/page/sort_minor_page.dart';
 import 'package:jinchanchan/page/sort_top_page.dart';
 import 'package:jinchanchan/page/use_help_page.dart';
+import 'package:jinchanchan/server/http_client.dart';
+import 'package:jinchanchan/util/app_util.dart';
+import 'package:jinchanchan/util/device_info.dart';
 import 'package:oktoast/oktoast.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //强制竖屏
+  // 强制竖屏
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const MyApp('/'));
+  // 初始化实例
+  Get.put(AppController());
+  HttpClient.getInstance();
+  await DeviceInfo.getInstance();
+
+  if (await AppUtil.checkNetAvailability()) {
+    runApp(const MyApp('/'));
+  }
 }
 
 class MyApp extends StatelessWidget {
