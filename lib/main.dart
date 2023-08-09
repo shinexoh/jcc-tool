@@ -13,7 +13,16 @@ import 'package:jinchanchan/page/use_help_page.dart';
 import 'package:jinchanchan/server/http_client.dart';
 import 'package:jinchanchan/util/app_util.dart';
 import 'package:jinchanchan/util/device_info.dart';
-import 'package:oktoast/oktoast.dart';
+// import 'package:oktoast/oktoast.dart';
+
+/*
+OKToast(
+              duration: const Duration(seconds: 3),
+              position: ToastPosition.bottom,
+              dismissOtherOnShow: true,
+              child: child!,
+            )
+ */
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +32,9 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  //设置Dark风格状态栏
+  AppUtil.setStatusBarDark();
 
   // 初始化实例
   Get.put(AppController());
@@ -64,12 +76,7 @@ class MyApp extends StatelessWidget {
         //禁止字体大小跟随系统变化
         return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: OKToast(
-              duration: const Duration(seconds: 3),
-              position: ToastPosition.bottom,
-              dismissOtherOnShow: true,
-              child: child!,
-            ));
+            child: child!);
       },
     );
   }

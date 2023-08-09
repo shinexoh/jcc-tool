@@ -6,7 +6,6 @@ import 'package:jinchanchan/page/home/home_page.dart';
 import 'package:jinchanchan/util/device_info.dart';
 import 'package:jinchanchan/widgets/dialog_style.dart';
 import 'package:jinchanchan/widgets/show_snackbar.dart';
-import 'package:oktoast/oktoast.dart';
 
 mixin HomeLogic on State<HomePage> {
   final AppController appController = Get.find<AppController>();
@@ -15,6 +14,7 @@ mixin HomeLogic on State<HomePage> {
   void initState() {
     super.initState();
     initTitle();
+    initBanner();
   }
 
   // 标题与副标题
@@ -27,28 +27,13 @@ mixin HomeLogic on State<HomePage> {
   var repairFlash = false.obs;
   var noScreen = true.obs;
 
-  List<Map> bannerData = const [
-    {
-      'image': 'https://img.lovestu.com/uploads/2020/09/ghwxbanner.png',
-      'title': '这是一个公众号推广图',
-      'url': 'https://www.baidu.com/'
-    },
-    {
-      'image': 'https://img.lovestu.com/uploads/2021/10/windows11banner1.png',
-      'title': '这是微软的Windows11',
-      'url': 'https://v.qq.com'
-    },
-    {
-      'image': 'https://img.lovestu.com/uploads/2021/03/20210329.png',
-      'title': '这是一个域名更换通知',
-      'url': 'https://www.coolexe.com'
-    },
-  ];
+  // 轮播图信息
+  var bannerData = <Map>[].obs;
 
   // 启动游戏
   void onOpenGame() async {
     if (!await DeviceApps.openApp('com.tencent.jkchess')) {
-      showToast('启动失败，请手动启动');
+      showSnackBar('启动失败，请手动启动');
     }
   }
 
@@ -131,4 +116,6 @@ mixin HomeLogic on State<HomePage> {
       subTitle.value = '夜深了，放下手机，早点休息。';
     }
   }
+
+  void initBanner() async {}
 }

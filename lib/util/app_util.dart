@@ -1,6 +1,7 @@
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_apps/device_apps.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:jinchanchan/server/http_client.dart';
@@ -34,7 +35,7 @@ class AppUtil {
   static Future<bool> checkNetAvailability() async {
     final connectivity = await Connectivity().checkConnectivity();
     if (connectivity != ConnectivityResult.none) {
-      final http = await HttpClient.get('https://www.baidu.com/');
+      final http = await HttpClient.get('https://juejin.cn/');
       return http.isOk ? true : false;
     }
     return false;
@@ -79,5 +80,21 @@ class AppUtil {
         onOkButton: () => Get.back(),
       );
     }
+  }
+
+  /// 设置状态栏样式Light
+  static void setStatusBarLight() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ));
+  }
+
+  /// 设置状态栏样式Dark
+  static void setStatusBarDark() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ));
   }
 }

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:jinchanchan/app/assets_config.dart';
 import 'package:jinchanchan/page/home/home_logic.dart';
 import 'package:jinchanchan/util/app_util.dart';
-import 'package:jinchanchan/widgets/home_card.dart';
+import 'package:jinchanchan/widgets/common_card.dart';
 import 'package:jinchanchan/widgets/on_ink.dart';
 import 'package:remixicon_updated/remixicon_updated.dart';
 
@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
             topAppBar(),
             bannerBar(),
             tipsBar(),
+            textBar('检测专区'),
             optionBar(),
             textBar('优化工具'),
             switchBar(),
@@ -68,36 +69,37 @@ class _HomePageState extends State<HomePage> with HomeLogic {
       child: SizedBox(
         height: Get.height * 0.18,
         width: double.infinity,
-        child: Swiper(
-          itemCount: bannerData.length,
-          autoplay: true,
-          viewportFraction: 0.85,
-          scale: 0.92,
-          onTap: (index) => AppUtil.openUrl(bannerData[index]['url']),
-          itemBuilder: (context, index) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(bannerData[index]['image']),
+        child: Obx(() => Swiper(
+              itemCount: bannerData.length,
+              autoplay: true,
+              viewportFraction: 0.85,
+              scale: 0.92,
+              onTap: (index) => AppUtil.openUrl(bannerData[index]['url']),
+              itemBuilder: (context, index) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(bannerData[index]['image']),
+                      ),
+                    ),
+                    child: Container(
+                      width: double.infinity,
+                      color: Colors.black.withOpacity(0.3),
+                      padding:
+                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                      child: Text(
+                        bannerData[index]['title'],
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
-                ),
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.black.withOpacity(0.3),
-                  padding: const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                  child: Text(
-                    bannerData[index]['title'],
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
+                );
+              },
+            )),
       ),
     );
   }
@@ -125,10 +127,10 @@ class _HomePageState extends State<HomePage> with HomeLogic {
 
   Widget optionBar() {
     return Padding(
-      padding: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.only(top: 10),
       child: Column(
         children: [
-          HomeCard(
+          CommonCard(
             image: AssetsConfig.env,
             color: Colors.orange,
             title: '环境检测',
@@ -144,7 +146,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
             ),
           ),
           const SizedBox(height: 10),
-          HomeCard(
+          CommonCard(
             image: AssetsConfig.line,
             color: Colors.brown,
             title: '线路检测',
@@ -169,7 +171,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
       padding: const EdgeInsets.only(top: 10),
       child: Column(
         children: [
-          HomeCard(
+          CommonCard(
             image: AssetsConfig.adaptive,
             color: Colors.blue,
             title: '适配容器',
@@ -183,7 +185,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
             ),
           ),
           const SizedBox(height: 10),
-          HomeCard(
+          CommonCard(
             image: AssetsConfig.def,
             color: Colors.deepOrange,
             title: '动线防封',
@@ -197,7 +199,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
             ),
           ),
           const SizedBox(height: 10),
-          HomeCard(
+          CommonCard(
             image: AssetsConfig.repairFlash,
             color: Colors.cyan,
             title: '修复闪屏',
@@ -211,7 +213,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
             ),
           ),
           const SizedBox(height: 10),
-          HomeCard(
+          CommonCard(
             image: AssetsConfig.banScreen,
             color: Colors.deepPurple,
             title: '禁止录屏',
@@ -224,7 +226,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
               ),
             ),
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 20),
         ],
       ),
     );
@@ -232,9 +234,8 @@ class _HomePageState extends State<HomePage> with HomeLogic {
 
   Widget textBar(String text) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 10),
+      padding: const EdgeInsets.only(top: 20, left: 12),
       child: Row(children: [
-        Image.asset(AssetsConfig.lightning, height: 20, width: 20),
         Text(text,
             style: const TextStyle(
                 fontSize: 15,

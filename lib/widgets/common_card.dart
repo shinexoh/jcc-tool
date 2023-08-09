@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 /// 首页的卡片封装
-class HomeCard extends StatelessWidget {
+class CommonCard extends StatelessWidget {
   final String image;
   final Color color;
   final String title;
   final String subTitle;
   final Widget child;
 
-  const HomeCard({
+  const CommonCard({
     super.key,
     required this.image,
     required this.color,
@@ -43,23 +43,29 @@ class HomeCard extends StatelessWidget {
             child: Image.asset(image, height: 45, width: 45),
           ),
           const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                subTitle,
-                style: TextStyle(color: Colors.white.withOpacity(0.8)),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  subTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: Colors.white.withOpacity(0.8)),
+                ),
+              ],
+            ),
           ),
-          const Spacer(),
+          const SizedBox(width: 10),
           child,
         ],
       ),
