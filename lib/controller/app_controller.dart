@@ -4,5 +4,5 @@ import 'package:get/get.dart';
 class AppController extends GetxController {
   // 存储权限
   var storagePermission = false.obs;
-  void setStorage(bool value) => storagePermission.value = value;
+  void setStoragePermission(bool value) => storagePermission.value = value;
 }

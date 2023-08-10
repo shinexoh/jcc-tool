@@ -9,8 +9,17 @@ class HttpClient {
 
   HttpClient._() {
     _dio = Dio(BaseOptions(
-        connectTimeout: const Duration(seconds: 7),
-        receiveTimeout: const Duration(seconds: 7)));
+      connectTimeout: const Duration(seconds: 7),
+      receiveTimeout: const Duration(seconds: 7),
+    ));
+
+    _dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        Future.delayed(const Duration(seconds: 2), () {
+          handler.next(options);
+        });
+      },
+    ));
   }
 
   static HttpClient getInstance() => _instance ??= HttpClient._();

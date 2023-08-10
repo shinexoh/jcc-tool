@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jinchanchan/page/about_page.dart';
-import 'package:jinchanchan/page/device_page.dart';
+import 'package:jinchanchan/page/user_page.dart';
 import 'package:jinchanchan/page/function/function_page.dart';
 import 'package:jinchanchan/page/home/home_page.dart';
 import 'package:jinchanchan/page/index/index_logic.dart';
@@ -17,8 +16,7 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage> with IndexLogic {
   int pageIndex = 0;
 
-  List<Widget> get pageBody =>
-      const [HomePage(), FunctionPage(), DevicePage(), AboutPage()];
+  List<Widget> get pageBody => const [HomePage(), FunctionPage(), UserPage()];
 
   List<SalomonBottomBarItem> get items => [
         SalomonBottomBarItem(
@@ -40,13 +38,6 @@ class _IndexPageState extends State<IndexPage> with IndexLogic {
           unselectedColor: Colors.black54,
           title: const Text('我的'),
         ),
-        SalomonBottomBarItem(
-          icon: const Icon(Remix.quill_pen_line),
-          activeIcon: const Icon(Remix.quill_pen_fill),
-          selectedColor: Colors.indigo,
-          unselectedColor: Colors.black54,
-          title: const Text('关于'),
-        ),
       ];
 
   void onTap(int index) {
@@ -65,7 +56,7 @@ class _IndexPageState extends State<IndexPage> with IndexLogic {
         child: SalomonBottomBar(
           curve: Curves.bounceOut,
           backgroundColor: Colors.white,
-          margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
+          margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 50),
           currentIndex: pageIndex,
           onTap: (index) => onTap(index),
           items: items,

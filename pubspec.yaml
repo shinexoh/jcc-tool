@@ -40,9 +40,11 @@ dependencies:
   oktoast: ^3.3.1
   get: ^4.6.5
   awesome_dialog: 3.0.2
+  transparent_image: ^2.0.1
   remixicon_updated: ^1.0.2
   salomon_bottom_bar: ^3.3.2
   device_apps: ^2.2.0
+  permission_handler: ^10.4.3
   android_intent_plus: ^3.1.9
   device_info_plus: ^8.2.2
   battery_plus: ^3.0.6

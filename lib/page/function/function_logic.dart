@@ -1,21 +1,30 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jinchanchan/page/function/function_page.dart';
+import 'package:jinchanchan/server/api.dart';
+import 'package:jinchanchan/server/http_client.dart';
 
 mixin FunctionLogic on State<FunctionPage> {
-  void onSortTop() {
-    Get.toNamed('/sorttop');
+  @override
+  void initState() {
+    super.initState();
+    initFunction();
   }
 
-  void onSortMinor() {
-    Get.toNamed('/sortminor');
-  }
+  // 功能列表
+  var functionData = <Map>[].obs;
 
-  void onSortMiddle() {
-    Get.toNamed('/sortmiddle');
-  }
+  // 请求功能列表
+  void initFunction() async {
+    final httpFunction = await HttpClient.get(Api.mainApi);
 
-  void onSortLow() {
-    Get.toNamed('/sortlow');
+    if (httpFunction.isOk) {
+      final Map fFuntionc = jsonDecode(httpFunction.data);
+
+      for (var element in fFuntionc['function']) {
+        functionData.add(element);
+      }
+    }
   }
 }

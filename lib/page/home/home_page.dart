@@ -69,60 +69,64 @@ class _HomePageState extends State<HomePage> with HomeLogic {
       child: SizedBox(
         height: Get.height * 0.18,
         width: double.infinity,
-        child: Obx(() => Swiper(
-              itemCount: bannerData.length,
-              autoplay: true,
-              viewportFraction: 0.85,
-              scale: 0.92,
-              onTap: (index) => AppUtil.openUrl(bannerData[index]['url']),
-              itemBuilder: (context, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(bannerData[index]['image']),
-                      ),
-                    ),
+        child: Obx(() => bannerData.isEmpty
+            ? const SizedBox()
+            : Swiper(
+                itemCount: bannerData.length,
+                autoplay: true,
+                viewportFraction: 0.85,
+                scale: 0.92,
+                onTap: (index) => AppUtil.openUrl(bannerData[index]['url']),
+                itemBuilder: (context, index) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      width: double.infinity,
-                      color: Colors.black.withOpacity(0.3),
-                      padding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                      child: Text(
-                        bannerData[index]['title'],
-                        style: const TextStyle(color: Colors.white),
+                      alignment: Alignment.bottomCenter,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(bannerData[index]['image']),
+                        ),
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        color: Colors.black.withOpacity(0.3),
+                        padding:
+                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                        child: Text(
+                          bannerData[index]['title'],
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            )),
+                  );
+                },
+              )),
       ),
     );
   }
 
   Widget tipsBar() {
-    return OnInk(
-      borderRadius: BorderRadius.circular(10),
-      color: Colors.grey.shade200,
-      margin: const EdgeInsets.only(top: 15, left: 10, right: 10),
-      padding: const EdgeInsets.all(10),
-      onTap: onTips,
-      child: const Row(children: [
-        Icon(Remix.chat_smile_2_line),
-        SizedBox(width: 10),
-        Expanded(
-          child: Text(
-            '如出现问题请及时反馈，祝你玩的开心！如出现问题请及时反馈，祝你玩的开心！如出现问题请及时反馈，祝你玩的开心！如出现问题请及时反馈，祝你玩的开心！如出现问题请及时反馈，祝你玩的开心！如出现问题请及时反馈，祝你玩的开心！如出现问题请及时反馈，祝你玩的开心！',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ]),
-    );
+    return Obx(() => tipsData.isEmpty
+        ? const SizedBox()
+        : OnInk(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.grey.shade200,
+            margin: const EdgeInsets.only(top: 15, left: 10, right: 10),
+            padding: const EdgeInsets.all(10),
+            onTap: onTips,
+            child: Row(children: [
+              const Icon(Remix.chat_smile_2_line),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  tipsData.value,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ]),
+          ));
   }
 
   Widget optionBar() {

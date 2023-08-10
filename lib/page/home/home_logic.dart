@@ -1,11 +1,15 @@
+import 'dart:convert';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jinchanchan/controller/app_controller.dart';
 import 'package:jinchanchan/page/home/home_page.dart';
+import 'package:jinchanchan/server/api.dart';
+import 'package:jinchanchan/server/http_client.dart';
 import 'package:jinchanchan/util/device_info.dart';
 import 'package:jinchanchan/widgets/dialog_style.dart';
 import 'package:jinchanchan/widgets/show_snackbar.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 mixin HomeLogic on State<HomePage> {
   final AppController appController = Get.find<AppController>();
@@ -13,8 +17,11 @@ mixin HomeLogic on State<HomePage> {
   @override
   void initState() {
     super.initState();
+    checkPermission();
+
     initTitle();
     initBanner();
+    initTips();
   }
 
   // 标题与副标题
@@ -30,6 +37,9 @@ mixin HomeLogic on State<HomePage> {
   // 轮播图信息
   var bannerData = <Map>[].obs;
 
+  // 公告
+  var tipsData = ''.obs;
+
   // 启动游戏
   void onOpenGame() async {
     if (!await DeviceApps.openApp('com.tencent.jkchess')) {
@@ -41,7 +51,13 @@ mixin HomeLogic on State<HomePage> {
   void onBanner(int index) {}
 
   // 点击公告
-  void onTips() {}
+  void onTips() {
+    DialogStyle.mainDialog(
+      subTitle: tipsData.value,
+      showCanceButton: false,
+      onOkButton: () => Get.back(),
+    );
+  }
 
   // 点击环境检测
   void onEnv() async {
@@ -51,7 +67,8 @@ mixin HomeLogic on State<HomePage> {
 
     DialogStyle.mainDialog(
       title: '环境检测',
-      subTitle: '手机型号${DeviceInfo.model}已适配',
+      subTitle:
+          '网络权限：已授予\n存储权限：${appController.storagePermission.value ? '已授予' : '未授予'}\n你的设备[${DeviceInfo.model}]已适配',
       showCanceButton: false,
       onOkButton: () => Get.back(),
     );
@@ -117,5 +134,32 @@ mixin HomeLogic on State<HomePage> {
     }
   }
 
-  void initBanner() async {}
+  // 检查存储权限
+  void checkPermission() async {
+    await Permission.storage.status == PermissionStatus.granted
+        ? appController.setStoragePermission(true)
+        : appController.setStoragePermission(false);
+  }
+
+  // 请求轮播图
+  void initBanner() async {
+    final httpBanner = await HttpClient.get(Api.mainApi);
+
+    if (httpBanner.isOk) {
+      final Map fBanner = jsonDecode(httpBanner.data);
+      for (var element in fBanner['banner']) {
+        bannerData.add(element);
+      }
+    }
+  }
+
+  // 请求公告
+  void initTips() async {
+    final httpTips = await HttpClient.get(Api.mainApi);
+
+    if (httpTips.isOk) {
+      final Map fTips = jsonDecode(httpTips.data);
+      tipsData.value = fTips['tips'];
+    }
+  }
 }
