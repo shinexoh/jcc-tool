@@ -94,5 +94,5 @@ class _SortPageState extends State<SortPage> {
     );
   }
 
-  void onItem() => showSnackBar('开启成功！');
+  void onItem() => showSnackBar('开启成功');
 }

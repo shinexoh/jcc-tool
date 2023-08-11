@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,7 @@ mixin IndexLogic on State<IndexPage> {
   void initState() {
     super.initState();
     checkPermission();
-    // checkUpdate();
+    checkUpdate();
   }
 
   // 检查存储权限
@@ -28,26 +29,33 @@ mixin IndexLogic on State<IndexPage> {
 
   // 检查应用更新
   void checkUpdate() async {
-    final httpUpdate = await HttpClient.get(Api.appUpdateApi);
+    final httpUpdate = await HttpClient.get(Api.mainApi);
 
     if (httpUpdate.isOk) {
-      final version =
-          httpUpdate.data['appupdate']['version'].toString().split('.').join();
+      final Map rUpdate = jsonDecode(httpUpdate.data);
+
+      final String version =
+          rUpdate['update']['version'].toString().split('.').join();
 
       if (double.parse(version) > AppConfig.updateVersion) {
         Get.dialog(
-          AlertDialog(
-            title: Text(httpUpdate.data['update']['title']),
-            content: Text(httpUpdate.data['update']['subtitle']),
-            actions: [
-              TextButton(
-                  onPressed: () => SystemNavigator.pop(),
-                  child: const Text('退出')),
-              FilledButton(
-                  onPressed: () =>
-                      AppUtil.openUrl(httpUpdate.data['update']['url']),
-                  child: const Text('立即更新')),
-            ],
+          WillPopScope(
+            onWillPop: () async {
+              SystemNavigator.pop();
+              return true;
+            },
+            child: AlertDialog(
+              title: Text(rUpdate['update']['title']),
+              content: Text(rUpdate['update']['subtitle']),
+              actions: [
+                TextButton(
+                    onPressed: () => SystemNavigator.pop(),
+                    child: const Text('退出')),
+                FilledButton(
+                    onPressed: () => AppUtil.openUrl(rUpdate['update']['url']),
+                    child: const Text('立即更新')),
+              ],
+            ),
           ),
           barrierDismissible: false,
         );
