@@ -20,11 +20,16 @@ mixin FunctionLogic on State<FunctionPage> {
     final httpFunction = await HttpClient.get(Api.mainApi);
 
     if (httpFunction.isOk) {
-      final Map fFuntionc = jsonDecode(httpFunction.data);
+      final Map rFunction = jsonDecode(httpFunction.data);
 
-      for (var element in fFuntionc['function']) {
+      for (var element in rFunction['function']) {
         functionData.add(element);
       }
     }
+  }
+
+  // 点击功能列表
+  void onItem(int index) {
+    Get.toNamed('/sort', arguments: functionData[index]);
   }
 }

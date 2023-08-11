@@ -35,9 +35,9 @@ class _PermissionPageState extends State<PermissionPage>
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15, color: Colors.grey)),
               const Spacer(),
-              Row(
-                children: [
-                  Obx(() => Expanded(
+              Obx(() => Row(
+                    children: [
+                      Expanded(
                         child: AnimatedButton(
                           text: permissionGranted.value ? '进入画质侠' : '立即授予',
                           height: 45,
@@ -45,11 +45,12 @@ class _PermissionPageState extends State<PermissionPage>
                           color: Colors.deepOrange,
                           pressEvent: onGrant,
                         ),
-                      )),
-                  const SizedBox(width: 10),
-                  TextButton(onPressed: onSkip, child: const Text('跳过')),
-                ],
-              ),
+                      ),
+                      SizedBox(width: permissionGranted.isFalse ? 10 : 0),
+                      if (permissionGranted.isFalse)
+                        TextButton(onPressed: onSkip, child: const Text('跳过')),
+                    ],
+                  )),
               const SizedBox(height: 20),
             ],
           ),

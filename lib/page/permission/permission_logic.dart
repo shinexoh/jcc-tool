@@ -67,8 +67,8 @@ mixin PermissionLogic on State<PermissionPage>, WidgetsBindingObserver {
     }
   }
 
-  //  点击跳过
-  void onSkip() => Get.toNamed('/');
+  // 点击跳过
+  void onSkip() => Get.offAllNamed('/');
 
   // 存储权限被拒绝弹窗
   void storageDialog() {

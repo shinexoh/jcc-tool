@@ -25,7 +25,7 @@ class _FunctionPageState extends State<FunctionPage> with FunctionLogic {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     topAppBar(),
-                    optionBar(),
+                    itemBar(),
                   ],
                 ),
               ),
@@ -48,7 +48,7 @@ class _FunctionPageState extends State<FunctionPage> with FunctionLogic {
     );
   }
 
-  Widget optionBar() {
+  Widget itemBar() {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Column(
@@ -68,7 +68,7 @@ class _FunctionPageState extends State<FunctionPage> with FunctionLogic {
                 color: Colors.white.withOpacity(0.3),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                onTap: () => Get.toNamed('/sort'),
+                onTap: () => onItem(index),
                 child: const Text('点击查看',
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),

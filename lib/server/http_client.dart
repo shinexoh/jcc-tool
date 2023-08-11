@@ -13,13 +13,13 @@ class HttpClient {
       receiveTimeout: const Duration(seconds: 7),
     ));
 
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        Future.delayed(const Duration(seconds: 2), () {
-          handler.next(options);
-        });
-      },
-    ));
+    // _dio.interceptors.add(InterceptorsWrapper(
+    //   onRequest: (options, handler) {
+    //     Future.delayed(const Duration(seconds: 2), () {
+    //       handler.next(options);
+    //     });
+    //   },
+    // ));
   }
 
   static HttpClient getInstance() => _instance ??= HttpClient._();

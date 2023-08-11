@@ -9,7 +9,6 @@ import 'package:jinchanchan/server/http_client.dart';
 import 'package:jinchanchan/util/device_info.dart';
 import 'package:jinchanchan/widgets/dialog_style.dart';
 import 'package:jinchanchan/widgets/show_snackbar.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 mixin HomeLogic on State<HomePage> {
   final AppController appController = Get.find<AppController>();
@@ -17,7 +16,6 @@ mixin HomeLogic on State<HomePage> {
   @override
   void initState() {
     super.initState();
-    checkPermission();
 
     initTitle();
     initBanner();
@@ -134,20 +132,13 @@ mixin HomeLogic on State<HomePage> {
     }
   }
 
-  // 检查存储权限
-  void checkPermission() async {
-    await Permission.storage.status == PermissionStatus.granted
-        ? appController.setStoragePermission(true)
-        : appController.setStoragePermission(false);
-  }
-
   // 请求轮播图
   void initBanner() async {
     final httpBanner = await HttpClient.get(Api.mainApi);
 
     if (httpBanner.isOk) {
-      final Map fBanner = jsonDecode(httpBanner.data);
-      for (var element in fBanner['banner']) {
+      final Map rBanner = jsonDecode(httpBanner.data);
+      for (var element in rBanner['banner']) {
         bannerData.add(element);
       }
     }
@@ -158,8 +149,8 @@ mixin HomeLogic on State<HomePage> {
     final httpTips = await HttpClient.get(Api.mainApi);
 
     if (httpTips.isOk) {
-      final Map fTips = jsonDecode(httpTips.data);
-      tipsData.value = fTips['tips'];
+      final Map rTips = jsonDecode(httpTips.data);
+      tipsData.value = rTips['tips'];
     }
   }
 }

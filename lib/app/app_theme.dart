@@ -14,6 +14,9 @@ class AppTheme {
           elevation: 0,
           scrolledUnderElevation: 0,
           backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          titleTextStyle:
+              TextStyle(fontSize: 20, letterSpacing: 1, color: Colors.black),
         ),
         snackBarTheme: SnackBarThemeData(
           behavior: SnackBarBehavior.floating,

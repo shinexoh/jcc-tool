@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jinchanchan/page/user_page.dart';
 import 'package:jinchanchan/page/function/function_page.dart';
 import 'package:jinchanchan/page/home/home_page.dart';
@@ -14,7 +15,7 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> with IndexLogic {
-  int pageIndex = 0;
+  var pageIndex = 0.obs;
 
   List<Widget> get pageBody => const [HomePage(), FunctionPage(), UserPage()];
 
@@ -41,31 +42,29 @@ class _IndexPageState extends State<IndexPage> with IndexLogic {
       ];
 
   void onTap(int index) {
-    setState(() {
-      pageIndex = index;
-    });
+    pageIndex.value = index;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: DecoratedBox(
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(color: Colors.grey.shade200, blurRadius: 10)
-        ]),
-        child: SalomonBottomBar(
-          curve: Curves.bounceOut,
-          backgroundColor: Colors.white,
-          margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 50),
-          currentIndex: pageIndex,
-          onTap: (index) => onTap(index),
-          items: items,
-        ),
-      ),
-      body: IndexedStack(
-        index: pageIndex,
-        children: pageBody,
-      ),
-    );
+    return Obx(() => Scaffold(
+          bottomNavigationBar: DecoratedBox(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(color: Colors.grey.shade200, blurRadius: 10)
+            ]),
+            child: SalomonBottomBar(
+              curve: Curves.bounceOut,
+              backgroundColor: Colors.white,
+              margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 50),
+              currentIndex: pageIndex.value,
+              onTap: (index) => onTap(index),
+              items: items,
+            ),
+          ),
+          body: IndexedStack(
+            index: pageIndex.value,
+            children: pageBody,
+          ),
+        ));
   }
 }

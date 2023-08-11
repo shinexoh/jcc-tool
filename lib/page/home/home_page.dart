@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
         : OnInk(
             borderRadius: BorderRadius.circular(10),
             color: Colors.grey.shade200,
-            margin: const EdgeInsets.only(top: 15, left: 10, right: 10),
+            margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
             padding: const EdgeInsets.all(10),
             onTap: onTips,
             child: Row(children: [
@@ -239,13 +239,11 @@ class _HomePageState extends State<HomePage> with HomeLogic {
   Widget textBar(String text) {
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 12),
-      child: Row(children: [
-        Text(text,
-            style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic)),
-      ]),
+      child: Text(text,
+          style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic)),
     );
   }
 }

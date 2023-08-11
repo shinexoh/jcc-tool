@@ -6,11 +6,12 @@ import 'package:jinchanchan/app/app_theme.dart';
 import 'package:jinchanchan/controller/app_controller.dart';
 import 'package:jinchanchan/page/index/index_page.dart';
 import 'package:jinchanchan/page/permission/permission_page.dart';
-import 'package:jinchanchan/page/sort/sort_page.dart';
+import 'package:jinchanchan/page/sort_page.dart';
 import 'package:jinchanchan/page/use_help_page.dart';
 import 'package:jinchanchan/server/http_client.dart';
 import 'package:jinchanchan/util/app_util.dart';
 import 'package:jinchanchan/util/device_info.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,9 @@ void main() async {
   await DeviceInfo.getInstance();
 
   if (await AppUtil.checkNetAvailability()) {
-    runApp(const MyApp('/'));
+    await Permission.storage.status == PermissionStatus.granted
+        ? runApp(const MyApp('/'))
+        : runApp(const MyApp('/permission'));
   }
 }
 
