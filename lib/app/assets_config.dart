@@ -8,5 +8,4 @@ class AssetsConfig {
   static const String sort = 'assets/sort.png';
   static const String user = 'assets/user.png';
   static const String permission = 'assets/permission.png';
-  static const String arrow = 'assets/arrow.png';
 }
