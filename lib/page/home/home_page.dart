@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jinchanchan/app/assets_config.dart';
 import 'package:jinchanchan/page/home/home_logic.dart';
-import 'package:jinchanchan/util/app_util.dart';
 import 'package:jinchanchan/widgets/common_card.dart';
 import 'package:jinchanchan/widgets/on_ink.dart';
 import 'package:remixicon_updated/remixicon_updated.dart';
@@ -76,7 +75,7 @@ class _HomePageState extends State<HomePage> with HomeLogic {
                 autoplay: true,
                 viewportFraction: 0.85,
                 scale: 0.92,
-                onTap: (index) => AppUtil.openUrl(bannerData[index]['url']),
+                onTap: (index) => onBanner(index),
                 itemBuilder: (context, index) {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(10),

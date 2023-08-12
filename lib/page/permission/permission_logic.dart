@@ -75,7 +75,7 @@ mixin PermissionLogic on State<PermissionPage>, WidgetsBindingObserver {
     DialogStyle.mainDialog(
       title: '你已拒绝权限',
       subTitle:
-          '由于${AppConfig.appName}需要【文件存储权限】才能修改画质，请点击【手动授予】跳转到设置，手动给画质侠授予【文件存储权限】',
+          '由于${AppConfig.appName}需要【文件存储权限】才能正常使用，请点击【手动授予】跳转到设置，手动给${AppConfig.appName}授予【文件存储权限】',
       showCanceButton: false,
       okButtonTitle: '手动授予',
       onOkButton: () async {

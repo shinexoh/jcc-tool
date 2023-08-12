@@ -31,7 +31,7 @@ class _PermissionPageState extends State<PermissionPage>
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
               const SizedBox(height: 5),
               const Text(
-                  '由于${AppConfig.appName}需要手机“存储权限”才能修改画质，为了你的正常使用，请授予画质侠权限！',
+                  '由于${AppConfig.appName}需要手机“存储权限”才能正常使用，为了你的完整体验，请授予${AppConfig.appName}存储权限！',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15, color: Colors.grey)),
               const Spacer(),

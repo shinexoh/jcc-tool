@@ -6,6 +6,7 @@ import 'package:jinchanchan/controller/app_controller.dart';
 import 'package:jinchanchan/page/home/home_page.dart';
 import 'package:jinchanchan/server/api.dart';
 import 'package:jinchanchan/server/http_client.dart';
+import 'package:jinchanchan/util/app_util.dart';
 import 'package:jinchanchan/util/device_info.dart';
 import 'package:jinchanchan/widgets/dialog_style.dart';
 import 'package:jinchanchan/widgets/show_snackbar.dart';
@@ -46,7 +47,9 @@ mixin HomeLogic on State<HomePage> {
   }
 
   // 点击轮播图
-  void onBanner(int index) {}
+  void onBanner(int index) {
+    AppUtil.openUrl(bannerData[index]['url']);
+  }
 
   // 点击公告
   void onTips() {
@@ -132,7 +135,7 @@ mixin HomeLogic on State<HomePage> {
     }
   }
 
-  // 请求轮播图
+  // 初始化轮播图
   void initBanner() async {
     final httpBanner = await HttpClient.get(Api.mainApi);
 
@@ -144,7 +147,7 @@ mixin HomeLogic on State<HomePage> {
     }
   }
 
-  // 请求公告
+  // 初始化公告
   void initTips() async {
     final httpTips = await HttpClient.get(Api.mainApi);
 

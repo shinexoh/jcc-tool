@@ -15,7 +15,7 @@ mixin FunctionLogic on State<FunctionPage> {
   // 功能列表
   var functionData = <Map>[].obs;
 
-  // 请求功能列表
+  // 初始化功能列表
   void initFunction() async {
     final httpFunction = await HttpClient.get(Api.mainApi);
 

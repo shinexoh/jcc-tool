@@ -46,7 +46,7 @@ class _UserPageState extends State<UserPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 topAppBar(),
-                imageBar(),
+                headBar(),
                 permissionBar(),
                 deviceInfoBar(),
                 helpBar(),
@@ -71,7 +71,7 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget imageBar() {
+  Widget headBar() {
     return Center(
       child: Column(
         children: [
