@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jinchanchan/server/api.dart';
@@ -27,7 +26,7 @@ class _UseHelpPageState extends State<UseHelpPage> {
     final httpUseHelp = await HttpClient.get(Api.mainApi);
 
     if (httpUseHelp.isOk) {
-      final Map rUseHelp = jsonDecode(httpUseHelp.data);
+      final Map rUseHelp = httpUseHelp.data;
 
       for (var element in rUseHelp['help']) {
         useHelpData.add(element);
@@ -74,8 +73,8 @@ class _UseHelpPageState extends State<UseHelpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(children: [
-                const Icon(Remix.information_line),
-                const SizedBox(width: 10),
+                const Icon(Remix.magic_line),
+                const SizedBox(width: 5),
                 Expanded(
                   child: Text(
                     useHelpData[index]['title'],

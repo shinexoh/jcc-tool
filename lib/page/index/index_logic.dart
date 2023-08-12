@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -32,7 +31,7 @@ mixin IndexLogic on State<IndexPage> {
     final httpUpdate = await HttpClient.get(Api.mainApi);
 
     if (httpUpdate.isOk) {
-      final Map rUpdate = jsonDecode(httpUpdate.data);
+      final Map rUpdate = httpUpdate.data;
 
       final String version =
           rUpdate['update']['version'].toString().split('.').join();

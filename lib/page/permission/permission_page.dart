@@ -39,7 +39,9 @@ class _PermissionPageState extends State<PermissionPage>
                     children: [
                       Expanded(
                         child: AnimatedButton(
-                          text: permissionGranted.value ? '进入画质侠' : '立即授予',
+                          text: permissionGranted.value
+                              ? '进入${AppConfig.appName}'
+                              : '立即授予',
                           height: 45,
                           isFixedHeight: false,
                           color: Colors.deepOrange,

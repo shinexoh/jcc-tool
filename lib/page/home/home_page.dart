@@ -83,17 +83,23 @@ class _HomePageState extends State<HomePage> with HomeLogic {
                       alignment: Alignment.bottomCenter,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                           image: NetworkImage(bannerData[index]['image']),
                         ),
                       ),
                       child: Container(
                         width: double.infinity,
                         color: Colors.black.withOpacity(0.3),
-                        padding:
-                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                        padding: const EdgeInsets.only(
+                          top: 5,
+                          bottom: 5,
+                          left: 10,
+                          right: 10,
+                        ),
                         child: Text(
                           bannerData[index]['title'],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),

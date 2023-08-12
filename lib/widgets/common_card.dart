@@ -44,21 +44,27 @@ class CommonCard extends StatelessWidget {
               border: Border.all(color: Colors.white, width: 2),
             ),
             child: networkImage
-                ? FadeInImage.memoryNetwork(
-                    height: 45,
-                    width: 45,
-                    placeholder: kTransparentImage,
-                    fadeInDuration: const Duration(milliseconds: 300),
-                    fit: BoxFit.cover,
-                    image: image,
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(22.5),
+                    child: FadeInImage.memoryNetwork(
+                      height: 45,
+                      width: 45,
+                      placeholder: kTransparentImage,
+                      fadeInDuration: const Duration(milliseconds: 300),
+                      fit: BoxFit.cover,
+                      image: image,
+                    ),
                   )
-                : FadeInImage(
-                    height: 45,
-                    width: 45,
-                    placeholder: MemoryImage(kTransparentImage),
-                    fadeInDuration: const Duration(milliseconds: 300),
-                    fit: BoxFit.cover,
-                    image: AssetImage(image),
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(22.5),
+                    child: FadeInImage(
+                      height: 45,
+                      width: 45,
+                      placeholder: MemoryImage(kTransparentImage),
+                      fadeInDuration: const Duration(milliseconds: 300),
+                      fit: BoxFit.cover,
+                      image: AssetImage(image),
+                    ),
                   ),
           ),
           const SizedBox(width: 10),

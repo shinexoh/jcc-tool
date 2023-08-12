@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jinchanchan/app/app_config.dart';
 import 'package:jinchanchan/app/assets_config.dart';
 import 'package:jinchanchan/controller/app_controller.dart';
 import 'package:jinchanchan/util/device_info.dart';
@@ -89,7 +90,7 @@ class _UserPageState extends State<UserPage> {
           ),
           const SizedBox(height: 5),
           const Text(
-            '我是应用名称',
+            '${AppConfig.appName}用户',
             style: TextStyle(
               fontSize: 19,
               fontWeight: FontWeight.bold,

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -140,7 +139,7 @@ mixin HomeLogic on State<HomePage> {
     final httpBanner = await HttpClient.get(Api.mainApi);
 
     if (httpBanner.isOk) {
-      final Map rBanner = jsonDecode(httpBanner.data);
+      final Map rBanner = httpBanner.data;
       for (var element in rBanner['banner']) {
         bannerData.add(element);
       }
@@ -152,7 +151,7 @@ mixin HomeLogic on State<HomePage> {
     final httpTips = await HttpClient.get(Api.mainApi);
 
     if (httpTips.isOk) {
-      final Map rTips = jsonDecode(httpTips.data);
+      final Map rTips = httpTips.data;
       tipsData.value = rTips['tips'];
     }
   }
