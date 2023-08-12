@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jinchanchan/app/assets_config.dart';
-import 'package:jinchanchan/widgets/on_ink.dart';
 import 'package:jinchanchan/widgets/show_snackbar.dart';
+import 'package:jinchanchan/widgets/use_button.dart';
 import 'package:remixicon_updated/remixicon_updated.dart';
 
 class SortPage extends StatefulWidget {
@@ -61,36 +60,19 @@ class _SortPageState extends State<SortPage> {
   }
 
   Widget itemBar() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 20),
-      child: Center(
-        child: Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: List.generate(arguments['list'].length, (index) {
-            return SizedBox(
-              width: (Get.width - 30) / 2,
-              child: OnInk(
-                color: Colors.deepOrange.withOpacity(0.12),
-                borderRadius: BorderRadius.circular(10),
-                padding: const EdgeInsets.all(15),
-                onTap: onItem,
-                child: Row(children: [
-                  Image.asset(AssetsConfig.star, height: 22, width: 22),
-                  const SizedBox(width: 5),
-                  Expanded(
-                    child: Text(
-                      arguments['list'][index],
-                      style: const TextStyle(
-                          fontSize: 15, color: Colors.deepOrange),
-                    ),
-                  ),
-                ]),
-              ),
-            );
-          }),
-        ),
-      ),
+    return Column(
+      children: List.generate(arguments['list'].length, (index) {
+        return UseButton(
+          title: arguments['list'][index],
+          margin: EdgeInsets.only(
+            top: index == 0 ? 20 : 0,
+            left: 10,
+            right: 10,
+            bottom: index == arguments['list'].length - 1 ? 20 : 15,
+          ),
+          onTap: onItem,
+        );
+      }),
     );
   }
 

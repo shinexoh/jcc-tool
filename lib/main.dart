@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: '金铲铲',
+      title: '闪电侠',
       color: Colors.white,
       theme: AppTheme.light,
       initialRoute: initialRoute,

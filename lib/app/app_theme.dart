@@ -23,10 +23,10 @@ class AppTheme {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
-        switchTheme: const SwitchThemeData(
-          trackOutlineColor: MaterialStatePropertyAll(Colors.white),
-          trackColor: MaterialStatePropertyAll(Colors.white),
-          thumbColor: MaterialStatePropertyAll(Colors.deepOrange),
+        switchTheme: SwitchThemeData(
+          trackOutlineColor: MaterialStatePropertyAll(Colors.grey.shade200),
+          trackColor: const MaterialStatePropertyAll(Colors.white),
+          thumbColor: const MaterialStatePropertyAll(Colors.deepOrange),
         ),
       );
 }

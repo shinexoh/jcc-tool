@@ -5,6 +5,7 @@ import 'package:jinchanchan/app/assets_config.dart';
 import 'package:jinchanchan/page/home/home_logic.dart';
 import 'package:jinchanchan/widgets/common_card.dart';
 import 'package:jinchanchan/widgets/on_ink.dart';
+import 'package:jinchanchan/widgets/outlined_text_button.dart';
 import 'package:remixicon_updated/remixicon_updated.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,8 +56,16 @@ class _HomePageState extends State<HomePage> with HomeLogic {
                           style: const TextStyle(color: Colors.grey)),
                     ],
                   )),
-              IconButton(
-                  onPressed: onOpenGame, icon: const Icon(Remix.rocket_line)),
+              GestureDetector(
+                onTap: onOpenGame,
+                child: const Row(children: [
+                  Icon(Remix.rocket_line),
+                  SizedBox(width: 5),
+                  Text('启动',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                ]),
+              ),
             ],
           )),
     );
@@ -140,36 +149,16 @@ class _HomePageState extends State<HomePage> with HomeLogic {
       child: Column(
         children: [
           CommonCard(
-            image: AssetsConfig.env,
-            color: Colors.orange,
-            title: '环境检测',
-            subTitle: '检测该机型是否适配',
-            child: OnInk(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white.withOpacity(0.3),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              onTap: onEnv,
-              child: const Text('点击检测',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-          ),
+              image: AssetsConfig.env,
+              title: '环境检测',
+              subTitle: '检测该机型是否适配',
+              child: OutlinedTextButton(title: '点击检测', onTap: onEnv)),
           const SizedBox(height: 10),
           CommonCard(
-            image: AssetsConfig.line,
-            color: Colors.brown,
-            title: '线路检测',
-            subTitle: '检测线路是否稳定',
-            child: OnInk(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white.withOpacity(0.3),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              onTap: onLine,
-              child: const Text('点击检测',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-          ),
+              image: AssetsConfig.line,
+              title: '线路检测',
+              subTitle: '检测线路是否稳定',
+              child: OutlinedTextButton(title: '点击检测', onTap: onLine)),
         ],
       ),
     );
@@ -182,7 +171,6 @@ class _HomePageState extends State<HomePage> with HomeLogic {
         children: [
           CommonCard(
             image: AssetsConfig.adaptive,
-            color: Colors.blue,
             title: '适配容器',
             subTitle: '没Root权限的请开启此功能',
             child: Obx(
@@ -196,7 +184,6 @@ class _HomePageState extends State<HomePage> with HomeLogic {
           const SizedBox(height: 10),
           CommonCard(
             image: AssetsConfig.def,
-            color: Colors.deepOrange,
             title: '动线防封',
             subTitle: '出现封号请开启此功能',
             child: Obx(
@@ -210,7 +197,6 @@ class _HomePageState extends State<HomePage> with HomeLogic {
           const SizedBox(height: 10),
           CommonCard(
             image: AssetsConfig.repairFlash,
-            color: Colors.cyan,
             title: '修复闪屏',
             subTitle: '游戏中出现闪屏请开启此功能',
             child: Obx(
@@ -224,7 +210,6 @@ class _HomePageState extends State<HomePage> with HomeLogic {
           const SizedBox(height: 10),
           CommonCard(
             image: AssetsConfig.banScreen,
-            color: Colors.deepPurple,
             title: '禁止录屏',
             subTitle: '直播中可勾选此功能',
             child: Obx(

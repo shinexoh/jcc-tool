@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jinchanchan/app/assets_config.dart';
 import 'package:jinchanchan/page/function/function_logic.dart';
 import 'package:jinchanchan/widgets/common_card.dart';
-import 'package:jinchanchan/widgets/on_ink.dart';
+import 'package:jinchanchan/widgets/outlined_text_button.dart';
 
 class FunctionPage extends StatefulWidget {
   const FunctionPage({super.key});
@@ -59,20 +59,11 @@ class _FunctionPageState extends State<FunctionPage> with FunctionLogic {
             ),
             child: CommonCard(
               image: functionData[index]['image'] ?? AssetsConfig.sort,
-              color: Colors.deepOrange,
               title: functionData[index]['title'],
               subTitle: functionData[index]['subtitle'],
               networkImage: functionData[index]['image'] == null ? false : true,
-              child: OnInk(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white.withOpacity(0.3),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                onTap: () => onItem(index),
-                child: const Text('点击查看',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
-              ),
+              child:
+                  OutlinedTextButton(title: '点击进入', onTap: () => onItem(index)),
             ),
           );
         }),
