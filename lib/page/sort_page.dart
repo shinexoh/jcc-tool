@@ -70,13 +70,11 @@ class _SortPageState extends State<SortPage> {
             right: 10,
             bottom: index == arguments['list'].length - 1 ? 20 : 15,
           ),
-          onTap: (value) => onItem(value),
+          onTap: onItem,
         );
       }),
     );
   }
 
-  void onItem(bool value) {
-    if (value) showSnackBar('开启成功');
-  }
+  void onItem() => showSnackBar('开启成功');
 }

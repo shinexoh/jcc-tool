@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:jinchanchan/widgets/outlined_text_button.dart';
 
-class UseButton extends StatefulWidget {
+class UseButton extends StatelessWidget {
   final String title;
   final EdgeInsetsGeometry? margin;
-  final void Function(bool) onTap;
+  final VoidCallback onTap;
 
   const UseButton({
     super.key,
@@ -14,16 +14,9 @@ class UseButton extends StatefulWidget {
   });
 
   @override
-  State<UseButton> createState() => _UseButtonState();
-}
-
-class _UseButtonState extends State<UseButton> {
-  var switchValue = false.obs;
-
-  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: widget.margin,
+      margin: margin,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -36,7 +29,7 @@ class _UseButtonState extends State<UseButton> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.title, style: const TextStyle(fontSize: 15)),
+              Text(title, style: const TextStyle(fontSize: 15)),
               const SizedBox(height: 5),
               Row(children: [
                 Container(
@@ -60,13 +53,7 @@ class _UseButtonState extends State<UseButton> {
               ]),
             ],
           ),
-          Obx(() => Switch(
-              value: switchValue.value,
-              inactiveThumbColor: Colors.grey,
-              onChanged: (value) {
-                widget.onTap(value);
-                switchValue.value = value;
-              })),
+          OutlinedTextButton(title: '点击开启', onTap: onTap),
         ],
       ),
     );
