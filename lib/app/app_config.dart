@@ -3,7 +3,7 @@ class AppConfig {
   static const String appName = '闪电侠';
 
   /// 应用版本号
-  static const String appVersion = '1.0.1';
+  static const String appVersion = '1.0.2';
 
   /// 更新版本号
   static final double updateVersion =
