@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:jinchanchan/server/http_client.dart';
 import 'package:jinchanchan/widgets/dialog_style.dart';
-import 'package:oktoast/oktoast.dart';
+import 'package:jinchanchan/widgets/show_snackbar.dart';
 
 class AppUtil {
   /// 调用系统浏览器打开网页
@@ -26,7 +26,7 @@ class AppUtil {
           onOkButton: () {
             Get.back();
             Clipboard.setData(ClipboardData(text: url));
-            showToast('复制网址成功');
+            showSnackBar('复制网址成功');
           });
     }
   }
@@ -44,7 +44,7 @@ class AppUtil {
   /// 打开应用设置界面
   static void openAppSettings() async {
     if (!await DeviceApps.openAppSettings('com.shinex.jinchanchan')) {
-      showToast('打开设置失败，请手动打开');
+      showSnackBar('打开设置失败，请手动打开');
     }
   }
 
