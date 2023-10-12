@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jinchanchan/app/app_config.dart';
 import 'package:jinchanchan/app/assets_config.dart';
 import 'package:jinchanchan/controller/app_controller.dart';
-import 'package:jinchanchan/util/device_info.dart';
+import 'package:jinchanchan/utils/device_info.dart';
 import 'package:jinchanchan/widgets/on_ink.dart';
 import 'package:remixicon_updated/remixicon_updated.dart';
 

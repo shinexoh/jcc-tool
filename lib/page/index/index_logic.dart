@@ -6,7 +6,7 @@ import 'package:jinchanchan/controller/app_controller.dart';
 import 'package:jinchanchan/page/index/index_page.dart';
 import 'package:jinchanchan/server/api.dart';
 import 'package:jinchanchan/server/http_client.dart';
-import 'package:jinchanchan/util/app_util.dart';
+import 'package:jinchanchan/utils/app_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 mixin IndexLogic on State<IndexPage> {

@@ -5,8 +5,8 @@ import 'package:jinchanchan/controller/app_controller.dart';
 import 'package:jinchanchan/page/home/home_page.dart';
 import 'package:jinchanchan/server/api.dart';
 import 'package:jinchanchan/server/http_client.dart';
-import 'package:jinchanchan/util/app_util.dart';
-import 'package:jinchanchan/util/device_info.dart';
+import 'package:jinchanchan/utils/app_util.dart';
+import 'package:jinchanchan/utils/device_info.dart';
 import 'package:jinchanchan/widgets/dialog_style.dart';
 import 'package:jinchanchan/widgets/show_snackbar.dart';
 
